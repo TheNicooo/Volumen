@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragmentVolumen">
+
+    <LinearLayout
+        android:id="@+id/lUser"
+        android:layout_width="68.7dp"
+        android:layout_height="40.7dp"
+        android:layout_marginLeft="23.3dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_item"
+        android:orientation="vertical"
+        android:padding="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="21.3dp"
+            android:layout_height="21.3dp"
+            android:layout_gravity="center"
+            android:background="@drawable/user" />
+
+        <TextView
+            android:id="@+id/tvRutPortico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif"
+            android:textColor="#000000"
+            android:textSize="8sp"
+            android:textStyle="normal"
+            tools:text="15.355.553-2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lPortico"
+        android:layout_width="68.7dp"
+        android:layout_height="40.7dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="23dp"
+        android:background="@drawable/rounded_item"
+        android:orientation="vertical"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="21.3dp"
+            android:layout_height="21.3dp"
+            android:layout_gravity="center"
+            android:background="@drawable/houses" />
+
+        <TextView
+            android:id="@+id/tvPortico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif"
+            android:textColor="#000000"
+            android:textSize="8sp"
+            android:textStyle="normal"
+            tools:text="Portico 1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lScanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lUser">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif"
+            android:text="@string/msg_barcode"
+            android:textColor="#000000"
+            android:textSize="9.3sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/scanner"
+            android:layout_width="97.3dp"
+            android:layout_height="27.3dp"
+            android:layout_marginLeft="6.7dp"
+            android:background="@drawable/rounded_item_gray"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="7.7dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/scan"
+                android:textColor="#000000"
+                android:textSize="13.3sp"
+                android:textStyle="normal" />
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="6.3dp"
+                android:background="@drawable/camera" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edtBarcode"
+        android:layout_width="260dp"
+        android:layout_height="24.7dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_item"
+        android:enabled="false"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lScanner"
+        tools:text="21522135121335312" />
+
+    <LinearLayout
+        android:id="@+id/lSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBarcode">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif"
+            android:text="@string/msg_size"
+            android:textColor="#000000"
+            android:textSize="9.3sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/lRequestSizes"
+            android:layout_width="97.3dp"
+            android:layout_height="27.3dp"
+            android:layout_marginLeft="6.7dp"
+            android:background="@drawable/rounded_item_gray"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="18.3dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/size"
+                android:textColor="#000000"
+                android:textSize="13.3sp"
+                android:textStyle="normal" />
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16.7dp"
+                android:background="@drawable/box" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lSizes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lSize">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="6.3dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/high"
+                android:textColor="#000000"
+                android:textSize="8.7sp"
+                android:textStyle="normal" />
+
+            <EditText
+                android:id="@+id/edtHigh"
+                android:layout_width="45.3dp"
+                android:layout_height="21.3dp"
+                android:layout_gravity="center"
+                android:background="@drawable/rounded_item"
+                android:enabled="false"
+                android:gravity="center"
+                tools:text="120" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="6.3dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/longg"
+                android:textColor="#000000"
+                android:textSize="8.7sp"
+                android:textStyle="normal" />
+
+            <EditText
+                android:id="@+id/edtLong"
+                android:layout_width="45.3dp"
+                android:layout_height="21.3dp"
+                android:layout_gravity="center"
+                android:background="@drawable/rounded_item"
+                android:enabled="false"
+                android:gravity="center"
+                tools:text="120" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="6.3dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/width"
+                android:textColor="#000000"
+                android:textSize="8.7sp"
+                android:textStyle="normal" />
+
+            <EditText
+                android:id="@+id/edtWidth"
+                android:layout_width="45.3dp"
+                android:layout_height="21.3dp"
+                android:layout_gravity="center"
+                android:background="@drawable/rounded_item"
+                android:enabled="false"
+                android:gravity="center"
+                tools:text="120" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/volume"
+                android:textColor="#000000"
+                android:textSize="8.7sp"
+                android:textStyle="normal" />
+
+            <EditText
+                android:id="@+id/edtVolume"
+                android:layout_width="45.3dp"
+                android:layout_height="21.3dp"
+                android:layout_gravity="center"
+                android:background="@drawable/rounded_item"
+                android:enabled="false"
+                android:gravity="center"
+                tools:text="120" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSend"
+        style="@style/button"
+        android:layout_width="146dp"
+        android:layout_height="41dp"
+        android:text="@string/btnSend"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lSizes"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSendNull"
+        style="@style/button"
+        android:layout_width="146dp"
+        android:layout_height="41dp"
+        android:text="@string/btnSendNull"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSend"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

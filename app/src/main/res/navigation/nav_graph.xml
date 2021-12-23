@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    app:startDestination="@id/login">
+
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.volumen.ui.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_login_to_connectInternetFragment"
+            app:destination="@id/connectInternet" />
+    </fragment>
+    <fragment
+        android:id="@+id/connectInternet"
+        android:name="com.example.volumen.ui.connect_internet.ConnectInternetFragment"
+        android:label="ConnectInternetFragment" >
+        <action
+            android:id="@+id/action_connectInternet_to_portico"
+            app:destination="@id/portico" />
+    </fragment>
+    <fragment
+        android:id="@+id/portico"
+        android:name="com.example.volumen.ui.portico.PorticoFragment"
+        android:label="PorticoFragment" >
+        <action
+            android:id="@+id/action_portico_to_login"
+            app:destination="@id/login" />
+        <action
+            android:id="@+id/action_portico_to_volumen"
+            app:destination="@id/volumen" />
+    </fragment>
+    <fragment
+        android:id="@+id/volumen"
+        android:name="com.example.volumen.ui.main.VolumenFragment"
+        android:label="PorticoFragment" >
+        <action
+            android:id="@+id/action_volumen_to_login"
+            app:destination="@id/login" />
+        <action
+            android:id="@+id/action_volumen_to_portico"
+            app:destination="@id/portico" />
+    </fragment>
+</navigation>

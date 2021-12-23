@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Volumen</string>
+    <string name="rut">Ingrese su RUT</string>
+    <string name="tv_rut">12345678-9</string>
+    <string name="btnLogin">INGRESAR</string>
+    <string name="btnConnect">CONECTAR</string>
+    <string name="text_wifi">Conexión Wi-fi:</string>
+    <string name="available_portico">Pórticos disponibles:</string>
+    <string name="msg_connect_wifi">Antes de poder continuar, debes conectarte a una red Wi-fi disponible:</string>
+    <string name="msg_barcode">Ingresar código de barra del paquete:</string>
+    <string name="scan">Escanear</string>
+    <string name="msg_size">Medición de volumen mediante pórtico:</string>
+    <string name="size">Medir</string>
+    <string name="high">Alto (cm)</string>
+    <string name="longg">Largo (cm)</string>
+    <string name="width">Ancho (cm)</string>
+    <string name="volume">Volumen</string>
+    <string name="btnNext">SIGUIENTE</string>
+    <string name="btnSend">ENVIAR</string>
+    <string name="btnSendNull">ENVIAR INEXACTO</string>
+
+    //Scandit
+    <string name="scan_result_parametrised">%1$s: %2$s\nSymbol count: %3$d</string>
+    <string name="scanned">Scanned</string>
+    <string name="ok">Ok</string>
+</resources>
