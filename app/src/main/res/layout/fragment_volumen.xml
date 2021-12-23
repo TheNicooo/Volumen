@@ -8,19 +8,19 @@
 
     <LinearLayout
         android:id="@+id/lUser"
-        android:layout_width="68.7dp"
-        android:layout_height="40.7dp"
+        android:layout_width="120dp"
+        android:layout_height="90dp"
         android:layout_marginLeft="23.3dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/rounded_item"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="21.3dp"
-            android:layout_height="21.3dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/user" />
 
@@ -29,23 +29,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="sans-serif"
-            android:textColor="#000000"
-            android:textSize="8sp"
-            android:textStyle="normal"
+            style="@style/body.normal"
             tools:text="15.355.553-2" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/lPortico"
-        android:layout_width="68.7dp"
-        android:layout_height="40.7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="23dp"
         android:background="@drawable/rounded_item"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -60,10 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="sans-serif"
-            android:textColor="#000000"
-            android:textSize="8sp"
-            android:textStyle="normal"
+            style="@style/body.normal"
             tools:text="Portico 1" />
 
     </LinearLayout>
@@ -83,11 +77,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="sans-serif"
             android:text="@string/msg_barcode"
-            android:textColor="#000000"
-            android:textSize="9.3sp"
-            android:textStyle="bold" />
+            style="@style/body.bold"/>
 
         <LinearLayout
             android:id="@+id/scanner"
@@ -102,11 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="7.7dp"
-                android:fontFamily="sans-serif"
                 android:text="@string/scan"
-                android:textColor="#000000"
-                android:textSize="13.3sp"
-                android:textStyle="normal" />
+                style="@style/body.normal"/>
 
             <ImageView
                 android:layout_width="18dp"
@@ -147,11 +135,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="sans-serif"
             android:text="@string/msg_size"
-            android:textColor="#000000"
-            android:textSize="9.3sp"
-            android:textStyle="bold" />
+            style="@style/body.bold" />
 
         <LinearLayout
             android:id="@+id/lRequestSizes"
@@ -168,9 +153,7 @@
                 android:layout_marginLeft="18.3dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/size"
-                android:textColor="#000000"
-                android:textSize="13.3sp"
-                android:textStyle="normal" />
+                style="@style/body.normal"/>
 
             <ImageView
                 android:layout_width="18dp"
@@ -205,20 +188,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:fontFamily="sans-serif-medium"
                 android:text="@string/high"
-                android:textColor="#000000"
-                android:textSize="8.7sp"
-                android:textStyle="normal" />
+                style="@style/body.normal"/>
 
             <EditText
                 android:id="@+id/edtHigh"
-                android:layout_width="45.3dp"
-                android:layout_height="21.3dp"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/rounded_item"
                 android:enabled="false"
                 android:gravity="center"
+                android:textSize="15dp"
                 tools:text="120" />
 
         </LinearLayout>
@@ -236,19 +217,18 @@
                 android:layout_margin="5dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/longg"
-                android:textColor="#000000"
-                android:textSize="8.7sp"
-                android:textStyle="normal" />
+                style="@style/body.normal"/>
 
             <EditText
                 android:id="@+id/edtLong"
-                android:layout_width="45.3dp"
-                android:layout_height="21.3dp"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/rounded_item"
                 android:enabled="false"
                 android:gravity="center"
-                tools:text="120" />
+                tools:text="120"
+                android:textSize="15dp"/>
 
         </LinearLayout>
 
@@ -265,19 +245,18 @@
                 android:layout_margin="5dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/width"
-                android:textColor="#000000"
-                android:textSize="8.7sp"
-                android:textStyle="normal" />
+                style="@style/body.normal"/>
 
             <EditText
                 android:id="@+id/edtWidth"
-                android:layout_width="45.3dp"
-                android:layout_height="21.3dp"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/rounded_item"
                 android:enabled="false"
                 android:gravity="center"
-                tools:text="120" />
+                tools:text="120"
+                android:textSize="15dp"/>
 
         </LinearLayout>
 
@@ -291,25 +270,43 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:fontFamily="sans-serif-medium"
                 android:text="@string/volume"
-                android:textColor="#000000"
-                android:textSize="8.7sp"
-                android:textStyle="normal" />
+                style="@style/body.normal" />
 
             <EditText
                 android:id="@+id/edtVolume"
-                android:layout_width="45.3dp"
-                android:layout_height="21.3dp"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/rounded_item"
                 android:enabled="false"
                 android:gravity="center"
-                tools:text="120" />
+                tools:text="120"
+                android:textSize="15dp"/>
 
         </LinearLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lScandit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical" />
+
+    <ImageView
+        android:id="@+id/imgResult"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/lScandit"
+        app:layout_constraintVertical_bias="0.13999999" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSend"
@@ -321,7 +318,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lSizes"
+        app:layout_constraintTop_toBottomOf="@+id/imgResult"
         app:layout_constraintVertical_bias="0.15" />
 
     <androidx.appcompat.widget.AppCompatButton

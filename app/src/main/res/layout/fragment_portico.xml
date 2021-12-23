@@ -7,19 +7,19 @@
 
     <LinearLayout
         android:id="@+id/lUser"
-        android:layout_width="68.7dp"
-        android:layout_height="40.7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="23.3dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/rounded_item"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="21.3dp"
-            android:layout_height="21.3dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/user" />
 
@@ -28,11 +28,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="sans-serif"
-            android:textColor="#000000"
-            android:textSize="8sp"
-            android:textStyle="normal"
+            style="@style/body.normal"
             tools:text="15.355.553-2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lIp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lUser">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/body.bold"
+            android:text="Numero PC"/>
+
+        <EditText
+            android:id="@+id/edtNumPc"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnIp"
+            style="@style/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GO"/>
 
     </LinearLayout>
 
@@ -43,7 +72,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lUser">
+        app:layout_constraintTop_toBottomOf="@+id/lIp">
 
         <TextView
             android:layout_width="wrap_content"

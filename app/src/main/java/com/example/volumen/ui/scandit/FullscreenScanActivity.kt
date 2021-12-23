@@ -10,8 +10,10 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.volumen.MainActivity
 import com.example.volumen.R
+import com.example.volumen.databinding.FragmentVolumenBinding
 import com.example.volumen.ui.main.Scanned
 import com.example.volumen.ui.main.VolumenFragment
+import com.example.volumen.ui.main.VolumenViewModel
 import com.scandit.datacapture.barcode.data.Barcode
 import com.scandit.datacapture.barcode.data.SymbologyDescription
 import com.scandit.datacapture.barcode.ui.overlay.BarcodeCaptureOverlay
@@ -21,9 +23,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.absoluteValue
 
 @AndroidEntryPoint
-open class FullscreenScanActivity() : CameraPermissionActivity(), ScanViewModel.ResultListener {
+open class FullscreenScanActivity() : CameraPermissionActivity(), ScanViewModel.ResultListener, Scanned {
     private val viewModel: ScanViewModel by viewModels()
     private var dialog: AlertDialog? = null
+
+    override var code: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +92,11 @@ open class FullscreenScanActivity() : CameraPermissionActivity(), ScanViewModel.
             barcodeResult?.data,
             barcodeResult?.symbolCount
         )
+
+        code = barcodeResult?.data!!
+
+        //passData(barcodeResult?.data!!)
+
         val mFragmentManager = supportFragmentManager
         val mFragmentTransaction = mFragmentManager.beginTransaction()
         val mFragment = VolumenFragment()
@@ -95,22 +104,34 @@ open class FullscreenScanActivity() : CameraPermissionActivity(), ScanViewModel.
         val mBundle = Bundle()
         mBundle.putString("code", barcodeResult?.data)
         mFragment.arguments = mBundle
-        mFragmentTransaction.replace(R.id.volumen, mFragment).commit()
-        //finish()
+        mFragmentTransaction.replace(R.id.main, mFragment).commit()
 
-//        dialog = AlertDialog.Builder(this)
-//            .setTitle(getString(R.string.scanned))
-//            .setMessage(message)
-//            .setCancelable(false)
-//            .setPositiveButton(R.string.ok,
-//                DialogInterface.OnClickListener { dialog, which -> viewModel.resumeScanning() })
-//            .create()
-//        dialog!!.show()
+        finish()
+        dialog = AlertDialog.Builder(this)
+            .setTitle(getString(R.string.scanned))
+            .setMessage(message)
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok,
+                DialogInterface.OnClickListener { dialog, which -> viewModel.resumeScanning() })
+            .create()
+        dialog!!.show()
     }
 
     companion object {
         fun getIntent(context: Context?): Intent {
             return Intent(context, FullscreenScanActivity::class.java)
         }
+    }
+
+    override fun passData(code: String) {
+        val bundle = Bundle()
+        bundle.putString("code", code)
+
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val fragment = VolumenFragment()
+        fragment.arguments = bundle
+
+        transaction.add(R.id.navHostFragment, fragment)
+        transaction.commit()
     }
 }

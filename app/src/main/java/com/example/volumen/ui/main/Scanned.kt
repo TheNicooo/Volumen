@@ -2,13 +2,8 @@ package com.example.volumen.ui.main
 
 interface Scanned {
 
-    var codeScan: String
+    val code: String
 
-    fun requestCode(code: String) {
-        codeScan = code
-    }
+    fun passData(code: String){}
 
-    fun showCode() : String {
-        return codeScan
-    }
 }

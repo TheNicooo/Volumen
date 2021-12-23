@@ -1,30 +1,46 @@
 package com.example.volumen.ui.main
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.volumen.R
 import com.example.volumen.api.volumen.CodeRequest
 import com.example.volumen.api.volumen.Volumen
 import com.example.volumen.databinding.FragmentVolumenBinding
 import com.example.volumen.ui.scandit.FullscreenScanActivity
-import com.example.volumen.utils.KEY_SCANDIT
-import com.example.volumen.utils.Resource
-import com.example.volumen.utils.URL_VOLUMEN
-import com.example.volumen.utils.formatRut
+import com.example.volumen.utils.*
 import com.google.android.material.snackbar.Snackbar
+import com.scandit.datacapture.barcode.capture.BarcodeCapture
+import com.scandit.datacapture.barcode.capture.BarcodeCaptureListener
+import com.scandit.datacapture.barcode.capture.BarcodeCaptureSession
+import com.scandit.datacapture.barcode.capture.BarcodeCaptureSettings
+import com.scandit.datacapture.barcode.data.Barcode
+import com.scandit.datacapture.barcode.data.Symbology
+import com.scandit.datacapture.barcode.ui.overlay.BarcodeCaptureOverlay
 import com.scandit.datacapture.core.capture.DataCaptureContext
+import com.scandit.datacapture.core.data.FrameData
+import com.scandit.datacapture.core.source.Camera
+import com.scandit.datacapture.core.source.FrameSourceState
+import com.scandit.datacapture.core.ui.DataCaptureView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.io.File
+import com.example.volumen.ui.main.Scanned as Scanned1
 
 @AndroidEntryPoint
-class VolumenFragment : Fragment(R.layout.fragment_volumen) {
+class VolumenFragment : Fragment(R.layout.fragment_volumen), BarcodeCaptureListener {
 
     private var _binding: FragmentVolumenBinding? = null
     private val binding get() = _binding!!
@@ -32,19 +48,18 @@ class VolumenFragment : Fragment(R.layout.fragment_volumen) {
 
     private var ip: String? = ""
     private lateinit var customProgressDialog: Dialog
+    private var codeScandit: String? = ""
 
     private var dataCaptureContext: DataCaptureContext =
         DataCaptureContext.forLicenseKey(KEY_SCANDIT)
-
-    private var flag: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        val bundle = arguments
-        val code = bundle?.getString("code", "")
+//        val bundle = arguments
+//        val code = bundle?.getString("code", "")
         _binding = FragmentVolumenBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -57,8 +72,10 @@ class VolumenFragment : Fragment(R.layout.fragment_volumen) {
     }
 
     override fun onResume() {
-        val bundle = arguments
-        val code = bundle?.getString("code", "")
+//        val bundle = arguments
+//        val code = bundle?.getString("code", "")
+        val scan = FullscreenScanActivity()
+        val any = scan.code
         super.onResume()
     }
 
@@ -66,10 +83,12 @@ class VolumenFragment : Fragment(R.layout.fragment_volumen) {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         val rut = sharedPref.getString("RUT", "")
         val namePortico = sharedPref.getString("NAME_PORTICO", "")
+        codeScandit = sharedPref.getString("CODE_SCANDIT", "")
         ip = sharedPref.getString("IP", "")
         binding.apply {
             tvRutPortico.text = rut?.let { formatRut(it) }
             tvPortico.text = namePortico
+            edtBarcode.setText(codeScandit)
         }
         customProgressDialog = Dialog(requireContext())
     }
@@ -83,14 +102,54 @@ class VolumenFragment : Fragment(R.layout.fragment_volumen) {
                 findNavController().navigate(R.id.action_volumen_to_portico)
             }
             lRequestSizes.setOnClickListener {
-                val code = CodeRequest("12345")
-                val url = ip + URL_VOLUMEN
-                viewModel.getVolumen(url, code)
+                if (codeScandit != null) {
+                    val code = CodeRequest(codeScandit!!)
+                    val url = ip + URL_VOLUMEN
+                    viewModel.getVolumen(url, code)
+                }
             }
             scanner.setOnClickListener {
-                val intent = Intent(requireContext(), FullscreenScanActivity::class.java)
-                startActivity(intent)
+                findNavController().navigate(R.id.action_volumen_to_scandit)
             }
+            btnSend.setOnClickListener {
+                if (validateSize()) {
+                    Snackbar.make(requireView(), "DATOS ENVIADOS", Snackbar.LENGTH_LONG).show()
+                    clear()
+                } else {
+                    Snackbar.make(requireView(), "FAVOR INGRESAR DATOS", Snackbar.LENGTH_LONG).show()
+                }
+            }
+            btnSendNull.setOnClickListener {
+                if (validateSize()) {
+                    Snackbar.make(requireView(), "DATOS ENVIADOS", Snackbar.LENGTH_LONG).show()
+                    clear()
+                } else {
+                    Snackbar.make(requireView(), "FAVOR INGRESAR DATOS", Snackbar.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun validateSize(): Boolean {
+        if (binding.edtBarcode.text.equals("")
+            || binding.edtHigh.text.equals("")
+            || binding.edtLong.text.equals("")
+            || binding.edtWidth.text.equals("")
+            || binding.edtVolume.text.equals("")) {
+            return false
+        }
+
+        return true
+    }
+
+    private fun clear() {
+        binding.apply {
+            edtBarcode.setText("")
+            edtWidth.setText("")
+            edtHigh.setText("")
+            edtLong.setText("")
+            edtVolume.setText("")
+            imgResult.setImageResource(android.R.color.transparent)
         }
     }
 
@@ -113,6 +172,9 @@ class VolumenFragment : Fragment(R.layout.fragment_volumen) {
                 edtVolume.setText(volumen.toString())
             }
         }
+        val image = data?.imagen
+        val pathImage = ip + URL_IMAGEN + image
+        Glide.with(requireContext()).load(pathImage).into(binding.imgResult)
         customProgressDialog.dismiss()
     }
 
@@ -129,50 +191,9 @@ class VolumenFragment : Fragment(R.layout.fragment_volumen) {
         }
     }
 
-//    private fun scandit() {
-//        val settings = BarcodeCaptureSettings()
-//        settings.apply {
-//            enableSymbology(Symbology.CODE128, true)
-//            enableSymbology(Symbology.CODE39, true)
-//            enableSymbology(Symbology.QR, true)
-//            enableSymbology(Symbology.EAN8, true)
-//            enableSymbology(Symbology.UPCE, true)
-//            enableSymbology(Symbology.EAN13_UPCA, true)
-//        }
-//
-//        val barcodeCapture = BarcodeCapture.forDataCaptureContext(dataCaptureContext, settings);
-//
-//        barcodeCapture.addListener(this)
-//
-//        val cameraSettings = BarcodeCapture.createRecommendedCameraSettings()
-//        val camera = Camera.getDefaultCamera()
-//        camera?.applySettings(cameraSettings)
-//
-//        dataCaptureContext.setFrameSource(camera)
-//
-//        camera?.switchToDesiredState(FrameSourceState.ON)
-//
-//        val dataCaptureView = DataCaptureView.newInstance(requireContext(), dataCaptureContext)
-//
-//        //binding.dataCaptureView.dataCaptureContext = dataCaptureContext
-//
-//        val overlay = BarcodeCaptureOverlay.newInstance(barcodeCapture, dataCaptureView)
-//
-//
-//    }
-//
-//    override fun onBarcodeScanned(
-//        barcodeCapture: BarcodeCapture,
-//        session: BarcodeCaptureSession,
-//        data: FrameData,
-//    ) {
-//        val recognizedBarcodes: List<Barcode> = session.newlyRecognizedBarcodes
-//        super.onBarcodeScanned(barcodeCapture, session, data)
-//    }
-
-//    override fun onDestroyView() {
-//        _binding = null
-//        super.onDestroyView()
-//    }
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
 
 }

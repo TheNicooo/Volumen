@@ -51,7 +51,6 @@ class PorticoFragment : Fragment(R.layout.fragment_portico) {
             tvRutPortico.text = rut?.let { formatRut(it) }
             tvWifiName.text = wifiName
         }
-        getPorticos()
     }
 
     private fun setUpView() {
@@ -62,11 +61,15 @@ class PorticoFragment : Fragment(R.layout.fragment_portico) {
             btnGoToMain.setOnClickListener {
                 findNavController().navigate(R.id.action_portico_to_volumen)
             }
+            btnIp.setOnClickListener {
+                val num = binding.edtNumPc.text.toString()
+                getPorticos(num)
+            }
         }
     }
 
-    private fun getPorticos() {
-        ip = "http://${getIp()}141:5000"
+    private fun getPorticos(num: String) {
+        ip = "http://${getIp()}$num:5000"
         val ipPortico = ip + URL_PORTICO
         viewModel.getPortico(ipPortico)
     }
@@ -137,6 +140,7 @@ class PorticoFragment : Fragment(R.layout.fragment_portico) {
             putString("NAME_PORTICO", "Portico 1")
             apply()
         }
+        sharedPref.edit().putString("CODE_SCANDIT", "").commit()
     }
 
     override fun onDestroyView() {
