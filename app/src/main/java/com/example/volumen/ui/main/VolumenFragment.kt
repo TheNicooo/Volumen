@@ -1,15 +1,12 @@
 package com.example.volumen.ui.main
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,29 +15,12 @@ import com.example.volumen.R
 import com.example.volumen.api.volumen.CodeRequest
 import com.example.volumen.api.volumen.Volumen
 import com.example.volumen.databinding.FragmentVolumenBinding
-import com.example.volumen.ui.scandit.FullscreenScanActivity
 import com.example.volumen.utils.*
-import com.google.android.material.snackbar.Snackbar
-import com.scandit.datacapture.barcode.capture.BarcodeCapture
-import com.scandit.datacapture.barcode.capture.BarcodeCaptureListener
-import com.scandit.datacapture.barcode.capture.BarcodeCaptureSession
-import com.scandit.datacapture.barcode.capture.BarcodeCaptureSettings
-import com.scandit.datacapture.barcode.data.Barcode
-import com.scandit.datacapture.barcode.data.Symbology
-import com.scandit.datacapture.barcode.ui.overlay.BarcodeCaptureOverlay
-import com.scandit.datacapture.core.capture.DataCaptureContext
-import com.scandit.datacapture.core.data.FrameData
-import com.scandit.datacapture.core.source.Camera
-import com.scandit.datacapture.core.source.FrameSourceState
-import com.scandit.datacapture.core.ui.DataCaptureView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import java.io.File
-import com.example.volumen.ui.main.Scanned as Scanned1
+
 
 @AndroidEntryPoint
-class VolumenFragment : Fragment(R.layout.fragment_volumen), BarcodeCaptureListener {
+class VolumenFragment : Fragment(R.layout.fragment_volumen) {
 
     private var _binding: FragmentVolumenBinding? = null
     private val binding get() = _binding!!
@@ -50,16 +30,14 @@ class VolumenFragment : Fragment(R.layout.fragment_volumen), BarcodeCaptureListe
     private lateinit var customProgressDialog: Dialog
     private var codeScandit: String? = ""
 
-    private var dataCaptureContext: DataCaptureContext =
-        DataCaptureContext.forLicenseKey(KEY_SCANDIT)
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-//        val bundle = arguments
-//        val code = bundle?.getString("code", "")
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().navigate(R.id.portico)
+        }
         _binding = FragmentVolumenBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -69,14 +47,6 @@ class VolumenFragment : Fragment(R.layout.fragment_volumen), BarcodeCaptureListe
         setUpView()
         initObservers()
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onResume() {
-//        val bundle = arguments
-//        val code = bundle?.getString("code", "")
-        val scan = FullscreenScanActivity()
-        val any = scan.code
-        super.onResume()
     }
 
     private fun init() {
@@ -113,30 +83,34 @@ class VolumenFragment : Fragment(R.layout.fragment_volumen), BarcodeCaptureListe
             }
             btnSend.setOnClickListener {
                 if (validateSize()) {
-                    Snackbar.make(requireView(), "DATOS ENVIADOS", Snackbar.LENGTH_LONG).show()
+                    view?.makeSnackbar(DATA_SENT, true)
                     clear()
                 } else {
-                    Snackbar.make(requireView(), "FAVOR INGRESAR DATOS", Snackbar.LENGTH_LONG).show()
+                    view?.makeSnackbar(DATA_NOT_SENT, false)
                 }
+
             }
             btnSendNull.setOnClickListener {
-                if (validateSize()) {
-                    Snackbar.make(requireView(), "DATOS ENVIADOS", Snackbar.LENGTH_LONG).show()
+                if (binding.edtBarcode.text.trim().isNotEmpty()) {
+                    view?.makeSnackbar(DATA_SENT, true)
                     clear()
                 } else {
-                    Snackbar.make(requireView(), "FAVOR INGRESAR DATOS", Snackbar.LENGTH_LONG).show()
+                    view?.makeSnackbar(DATA_NOT_SENT, false)
                 }
             }
         }
     }
 
     private fun validateSize(): Boolean {
-        if (binding.edtBarcode.text.equals("")
-            || binding.edtHigh.text.equals("")
-            || binding.edtLong.text.equals("")
-            || binding.edtWidth.text.equals("")
-            || binding.edtVolume.text.equals("")) {
-            return false
+
+        binding.apply {
+            if (edtBarcode.text.trim().isEmpty()
+                || edtVolume.text.trim().isEmpty()
+                || edtWidth.text.trim().isEmpty()
+                || edtLong.text.trim().isEmpty()
+                || edtHigh.text.trim().isEmpty()) {
+                return false
+            }
         }
 
         return true
@@ -187,7 +161,7 @@ class VolumenFragment : Fragment(R.layout.fragment_volumen), BarcodeCaptureListe
     private fun showErrorView(error: Throwable?) {
         binding.apply {
             customProgressDialog.dismiss()
-            Snackbar.make(requireView(), error?.message.toString(), Snackbar.LENGTH_LONG).show()
+            view?.makeSnackbar(error?.message.toString(), false)
         }
     }
 

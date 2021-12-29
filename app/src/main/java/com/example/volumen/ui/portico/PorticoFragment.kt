@@ -1,5 +1,6 @@
 package com.example.volumen.ui.portico
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.net.wifi.WifiManager
@@ -25,6 +26,7 @@ class PorticoFragment : Fragment(R.layout.fragment_portico) {
     private val binding get() = _binding!!
     private val viewModel: PorticoViewModel by viewModels()
 
+    private lateinit var customProgressDialog: Dialog
     private var ip: String = ""
 
     override fun onCreateView(
@@ -51,6 +53,7 @@ class PorticoFragment : Fragment(R.layout.fragment_portico) {
             tvRutPortico.text = rut?.let { formatRut(it) }
             tvWifiName.text = wifiName
         }
+        customProgressDialog = Dialog(requireContext())
     }
 
     private fun setUpView() {
@@ -85,36 +88,37 @@ class PorticoFragment : Fragment(R.layout.fragment_portico) {
     }
 
     private fun showSuccessView(data: PorticoStatus?) {
-        binding.apply {
-            progressBar.gone()
-            val status = data?.info_portico?.status
-            if (status != null) {
-                changeCardView(status)
-            }
-            saveData()
+        val status = data?.info_portico?.status
+        if (status != null) {
+            changeCardView(status)
         }
+        saveData()
+        customProgressDialog.dismiss()
     }
 
     private fun changeCardView(status: String) {
-        val textView = binding.txtPortico1
+        val card = binding.cdPortico1
         when (status) {
-            "maintenance" -> textView.setBackgroundColor(Color.GREEN)
+            "maintenance" -> card.setCardBackgroundColor(Color.GREEN)
             else -> {
-                textView.setBackgroundColor(Color.RED)
-                Snackbar.make(requireView(), "Error!!", Snackbar.LENGTH_LONG).show()
+                card.setCardBackgroundColor(Color.RED)
+                //Snackbar.make(requireView(), "Error!!", Snackbar.LENGTH_LONG).show()
             }
         }
+        customProgressDialog.dismiss()
     }
 
     private fun showLoadingView() {
-        binding.progressBar.visible()
+        customProgressDialog.setContentView(R.layout.custom_dialog)
+        customProgressDialog.setCancelable(false)
+        customProgressDialog.show()
     }
 
     private fun showErrorView(error: Throwable?) {
-        binding.apply {
-            progressBar.gone()
-            Snackbar.make(requireView(), error?.message.toString(), Snackbar.LENGTH_LONG).show()
-        }
+
+        customProgressDialog.dismiss()
+        view?.makeSnackbar(error?.message.toString(), false)
+
     }
 
     @Suppress("DEPRECATION")
@@ -140,8 +144,8 @@ class PorticoFragment : Fragment(R.layout.fragment_portico) {
             putString("NAME_PORTICO", "Portico 1")
             apply()
         }
-        sharedPref.edit().putString("CODE_SCANDIT", "").commit()
     }
+
 
     override fun onDestroyView() {
         _binding = null

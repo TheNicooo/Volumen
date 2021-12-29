@@ -43,11 +43,11 @@
             app:destination="@id/portico" />
         <action
             android:id="@+id/action_volumen_to_scandit"
-            app:destination="@id/scandit" />
+            app:destination="@id/scandit"/>
     </fragment>
     <fragment
         android:id="@+id/scandit"
-        android:name="com.example.volumen.ui.portico.ScanditFragment"
+        android:name="com.example.volumen.ui.scandit.ScanditFragment"
         android:label="ScanditFragment" >
         <action
             android:id="@+id/action_scandit_to_volumen"

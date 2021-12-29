@@ -95,6 +95,8 @@ dependencies {
     implementation "com.scandit.datacapture:text:$scandit_version"
     implementation "com.scandit.datacapture:id:$scandit_version"
 
+
+
 }
 
 kapt {

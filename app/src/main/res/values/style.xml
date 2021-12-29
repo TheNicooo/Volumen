@@ -15,4 +15,7 @@
     <style name="body.normal">
         <item name="android:textStyle">normal</item>
     </style>
+    <style name="MySnackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:layout_margin">32dp</item>
+    </style>
 </resources>

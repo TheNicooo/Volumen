@@ -15,34 +15,4 @@
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="vertical" />
 
-    <LinearLayout
-        android:id="@+id/lDialog"
-        android:visibility="gone"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txtCodeScandit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.84000003"
-        style="@style/button"
-        android:text="VOLVER"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

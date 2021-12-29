@@ -29,6 +29,7 @@ class ConnectInternetFragment : Fragment(R.layout.fragment_conection_wifi) {
     private val binding get() = _binding!!
 
     private var wifiName: String = ""
+    private var flag = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,13 +46,17 @@ class ConnectInternetFragment : Fragment(R.layout.fragment_conection_wifi) {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    override fun onResume() {
+        if (isConnectedWifi(requireContext()) && !flag) {
+            findNavController().navigate(R.id.action_connectInternet_to_portico)
+        }
+        super.onResume()
+    }
+
     private fun init() {
         if (isConnectedWifi(requireContext())) {
             findNavController().navigate(R.id.action_connectInternet_to_portico)
-            //getList()
-            //other()
-        } else {
-            Toast.makeText(activity, "Connection OFF", Toast.LENGTH_SHORT).show()
+            flag = true
         }
     }
 
@@ -60,7 +65,7 @@ class ConnectInternetFragment : Fragment(R.layout.fragment_conection_wifi) {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
-        val wifiManager = context.getSystemService(WIFI_SERVICE) as WifiManager?
+        val wifiManager = context.getApplicationContext().getSystemService(WIFI_SERVICE) as WifiManager?
         val wifiInfo = wifiManager!!.connectionInfo
         wifiName = wifiInfo.ssid
         saveWifiName()

@@ -33,132 +33,142 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/lIp"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lUser">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            style="@style/body.bold"
-            android:text="Numero PC"/>
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edtNumPc"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"/>
+            <LinearLayout
+                android:id="@+id/lIp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="40dp">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnIp"
-            style="@style/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="GO"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/body.bold"
+                    android:text="Numero PC"/>
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/edtNumPc"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"/>
 
-    <LinearLayout
-        android:id="@+id/lWifi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lIp">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnIp"
+                    style="@style/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GO"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            style="@style/body.bold"
-            android:text="@string/text_wifi" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvWifiName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            style="@style/body.normal"
-            tools:text="Wifi _ RED-STARKE"
-            android:layout_marginLeft="20dp"
-            android:padding="10dp"
-            android:background="@drawable/rounded_item"/>
+            <LinearLayout
+                android:id="@+id/lWifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/body.bold"
+                    android:text="@string/text_wifi" />
 
-    <TextView
-        android:id="@+id/tvTitlePortico"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        style="@style/body.bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lWifi"
-        android:text="@string/available_portico" />
+                <TextView
+                    android:id="@+id/tvWifiName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/body.normal"
+                    tools:text="Wifi _ RED-STARKE"
+                    android:layout_marginLeft="20dp"
+                    android:padding="10dp"
+                    android:background="@drawable/rounded_item"/>
 
-    <GridLayout
-        android:id="@+id/glPorticos"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:columnCount="2"
-        android:rowCount="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitlePortico">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cdPortico1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/txtPortico1"
-                android:layout_width="98dp"
-                android:layout_height="68.7dp"
-                android:layout_margin="20dp"
-                android:background="@drawable/rounded_item"
-                android:gravity="center"
-                style="@style/body.normal"
-                android:text="Pórtico 1" />
+                android:id="@+id/tvTitlePortico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                style="@style/body.bold"
+                android:text="@string/available_portico" />
 
-        </androidx.cardview.widget.CardView>
+            <GridLayout
+                android:id="@+id/glPorticos"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:columnCount="2"
+                android:rowCount="3"
+                android:padding="10dp">
 
-    </GridLayout>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cdPortico1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp"
+                    android:layout_margin="5dp">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnGoToMain"
-        style="@style/button"
-        android:layout_width="146dp"
-        android:layout_height="41dp"
-        android:text="@string/btnNext"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/glPorticos"
-        app:layout_constraintVertical_bias="0.15" />
+                    <TextView
+                        android:id="@+id/txtPortico1"
+                        android:layout_width="98dp"
+                        android:layout_height="68.7dp"
+                        android:gravity="center"
+                        style="@style/body.normal"
+                        android:text="Pórtico 1" />
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cdPortico2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp"
+                    android:layout_margin="5dp">
+
+                    <TextView
+                        android:id="@+id/txtPortico2"
+                        android:layout_width="98dp"
+                        android:layout_height="68.7dp"
+                        android:gravity="center"
+                        style="@style/body.normal"
+                        android:text="Pórtico 1" />
+
+                </androidx.cardview.widget.CardView>
+
+            </GridLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnGoToMain"
+                style="@style/button"
+                android:layout_width="146dp"
+                android:layout_height="41dp"
+                android:text="@string/btnNext"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <ImageView
         android:id="@+id/imageView"
